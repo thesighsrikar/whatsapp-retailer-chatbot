@@ -11,10 +11,10 @@ import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-mypath = r'D:\whatsapp-retailer-chatbot\data\raw\BigBasket-RawDataset'
+mypath = r'D:\whatsapp-retailer-chatbot\data\raw'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
-export_path = r'D:\whatsapp-retailer-chatbot\data\interim\BigBasket-CleanedDataset_Intermediate'
+export_path = r'D:\whatsapp-retailer-chatbot\data\interim'
 
 # Totally ignore this section since there will be pharmacies for this. 
 # Their demand will not decrease whene compared to other items.
@@ -22,6 +22,7 @@ onlyfiles.remove('BB_health-medicine.csv')
 
 cols_name = ['product-name', 'mrp', 'selling-price', 'num-of-ratings', 'discount (%)', 
         'brand', 'rating', 'combos', 'quantity-display'] # A list of all the important columns
+
 int_cols = ['selling-price', 'num-of-ratings', 'mrp', 'discount (%)', 'rating']
 
 for i in range(len(onlyfiles)):
@@ -38,7 +39,7 @@ for i in range(len(onlyfiles)):
     if ((onlyfiles[i] == 'BB_eggs-meat-fish.csv') | 
             (onlyfiles[i] == 'BB_fruits-vegetables.csv')):
         df_clean['selling-price'] = df_clean['selling-price'].astype('float64')
-        df_clean['mrp'] = df_clean['mrp'].astype(np.float64)
+        df_clean['mrp'] = df_clean['mrp'].astype('float64')
         df_clean['discount (%)'] = df_clean['discount (%)'].astype('float64')
     else:
         # Typecasting the columns required
